@@ -1,0 +1,6 @@
+Fechas:
+	DD/MM/AAAA -> 
+	AAAA-MM-DD ->
+	meses en texto -> 
+CUIT:
+	[0-9]{2}-[0-9]{8}-[0-9]
