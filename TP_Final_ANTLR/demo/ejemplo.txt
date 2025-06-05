@@ -1,1 +1,4 @@
-if id relop id + then id := num
+void suma () {
+    int x = 5;
+    x + 5;
+}
