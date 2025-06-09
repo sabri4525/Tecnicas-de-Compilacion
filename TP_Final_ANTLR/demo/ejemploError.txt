@@ -1,0 +1,47 @@
+// Declaración de función con parámetros y retorno
+int suma(int a, int b) {
+    int resultado = a + b
+    return resultado;
+}
+
+// Declaración de función sin retorno
+void imprimirSuma(int x, int y) {
+    int s = suma(x, y);
+    // Aquí podrías tener una función print si la agregas a tu lenguaje
+}
+
+// Declaración de variables globales
+int global = 10
+double pi = 3.14;
+char letra = 'A';
+
+// Función principal
+int main() {
+    int x = 5, y = 7, z;
+    double d = 2.5;
+    char c = 'b';
+
+    z = suma(x, y);
+
+    if (z > 10 {
+        z = z - 1;
+    } else {
+        z = z + 1;
+    }
+
+    while (x < 10) {
+        x = x + 1
+        if (x == 8) {
+            break;
+        }
+    }
+
+    for (int i = 0; i < 5; i = i + 1) {
+        y = y + i;
+        if (y > 20) {
+            continue
+        }
+    }
+
+    return 0
+}

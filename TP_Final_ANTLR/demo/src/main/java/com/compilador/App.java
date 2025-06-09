@@ -80,24 +80,16 @@ public class App {
         MiLenguajeParser parser = new MiLenguajeParser(tokens);
 
         parser.removeErrorListeners();
-        parser.addErrorListener(new BaseErrorListener() {
-            @Override
-            public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol,
-                    int line, int charPositionInLine, String msg, RecognitionException e) {
-                String errorMsg = "ERROR SINTÁCTICO en línea " + line + ":" + charPositionInLine +
-                        " - " + msg;
-                throw new RuntimeException(errorMsg);
-            }
-        });
+        parser.addErrorListener(new MiErrorListener()); // Usa tu listener personalizado
 
         try {
-            System.out.println("\n=== ANÁLISIS SINTÁCTICO ===");
+            System.out.println("\n=== ANALISIS SINTACTICO ===");
             System.out.println("Intentando analizar el archivo como programa...");
 
             ParseTree tree = parser.programa(); // Asegúrate de que "programa" sea la regla inicial
 
-            System.out.println("\n✅ Análisis sintáctico completado sin errores.");
-            System.out.println("Representación textual del árbol sintáctico:");
+            System.out.println("\n✅ Analisis sintactico completado sin errores.");
+            System.out.println("Representacion textual del arbol sintactico:");
             System.out.println(tree.toStringTree(parser));
 
             // Recorrido del árbol con visitor
@@ -110,7 +102,7 @@ public class App {
 
         } catch (RuntimeException e) {
             System.out.println("\n❌ " + e.getMessage());
-            System.out.println("El archivo no pudo ser analizado como programa válido.");
+            System.out.println("El archivo no pudo ser analizado como programa valido.");
         }
     }
 

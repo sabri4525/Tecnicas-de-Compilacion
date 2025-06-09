@@ -1,10 +1,18 @@
 grammar MiLenguaje;
 
 // Regla inicial
-programa: (declaracion | funcion | sentencia)* EOF;
+programa: (inicio)* EOF;
+
+// Inicio del programa
+inicio: sentenciaInicial | funcion;
+
+// Sentencia inicial 
+sentenciaInicial: declaracion | asignacion PYC | llamada PYC;
 
 // Declaraciones
-declaracion: tipo ID (IGUAL expresion)? PYC;
+declaracion: tipo listaDeclaracion PYC;
+listaDeclaracion: declarador (COMA declarador)*;
+declarador: ID (IGUAL expresion)?;
 
 // Declaración de función
 funcion: tipo ID PIZQ parametros? PDER bloque;
@@ -18,29 +26,30 @@ bloque: CIZQ sentencia* CDER;
 
 // Sentencias
 sentencia:
-	declaracion
-	| asignacion
-	| llamada PYC
-	| ifStmt
+	ifStmt
 	| whileStmt
 	| forStmt
 	| BREAK PYC
 	| CONTINUE PYC
 	| RETURN expresion? PYC
-	| bloque;
+	| bloque
+	| expresion PYC;
 
 // Asignación
-asignacion: ID IGUAL expresion PYC;
+asignacion: ID IGUAL expresion;
 
 // If-Else
-ifStmt: IF PIZQ expresion PDER sentencia (ELSE sentencia)?;
+ifStmt:
+	IF PIZQ expresion PDER CIZQ sentencia CDER (ELSE sentencia)?;
 
 // While
 whileStmt: WHILE PIZQ expresion PDER sentencia;
 
 // For
 forStmt:
-	FOR PIZQ (declaracion | asignacion | PYC) expresion? PYC asignacion? PDER sentencia;
+	FOR PIZQ forInit? PYC expresion? PYC asignacion? PDER sentencia;
+
+forInit: tipo listaDeclaracion | asignacion;
 
 // Llamada a función
 llamada: ID PIZQ argumentos? PDER;
@@ -48,15 +57,23 @@ argumentos: expresion (COMA expresion)*;
 
 // Expresiones
 expresion:
-    expresion op = (MUL | DIV) expresion                        # MulDiv
-    | expresion op = (MAS | MENOS) expresion                    # AddSub
-    | expresion op = (MENOR | MAYOR | MENOR_IGUAL | MAYOR_IGUAL | IGUAL_IGUAL | DISTINTO) expresion # Relacional
-    | expresion op = (AND | OR) expresion                       # Logica
-    | PIZQ expresion PDER                                       # Parentesis
-    | ID                                                        # IdExpr
-    | NUM                                                       # NumExpr
-    | CHAR                                                      # CharExpr
-    | llamada                                                   # LlamadaExpr;
+	expresion IGUAL expresion					# IgualExpr
+	| expresion op = (MUL | DIV) expresion		# MulDivExpr
+	| expresion op = (MAS | MENOS) expresion	# MasMenosExpr
+	| expresion op = (
+		MENOR
+		| MAYOR
+		| MENOR_IGUAL
+		| MAYOR_IGUAL
+		| IGUAL_IGUAL
+		| DISTINTO
+	) expresion								# Relacional
+	| expresion op = (AND | OR) expresion	# Logica
+	| PIZQ expresion PDER					# Parentesis
+	| ID									# IdExpr
+	| NUM									# NumExpr
+	| CHAR									# CharExpr
+	| llamada								# LlamadaExpr;
 
 // Tipos de datos
 tipo: INT | CHAR_TYPE | DOUBLE | VOID;
