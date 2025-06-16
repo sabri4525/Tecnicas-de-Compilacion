@@ -1,4 +1,4 @@
-// Generated from c:/Users/Sabri/Downloads/TP_Final_ANTLR/demo/src/main/antlr4/com/compilador/MiLenguaje.g4 by ANTLR 4.13.1
+// Generated from c:/Users/Sabri/Tecnicas-de-Compilacion/TP_Final_ANTLR/demo/src/main/antlr4/com/compilador/MiLenguaje.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -28,6 +28,30 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInicio(MiLenguajeParser.InicioContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInicio(MiLenguajeParser.InicioContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSentenciaInicial(MiLenguajeParser.SentenciaInicialContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSentenciaInicial(MiLenguajeParser.SentenciaInicialContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDeclaracion(MiLenguajeParser.DeclaracionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -35,6 +59,30 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeclaracion(MiLenguajeParser.DeclaracionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListaDeclaracion(MiLenguajeParser.ListaDeclaracionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListaDeclaracion(MiLenguajeParser.ListaDeclaracionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclarador(MiLenguajeParser.DeclaradorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclarador(MiLenguajeParser.DeclaradorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -148,6 +196,18 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterForInit(MiLenguajeParser.ForInitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitForInit(MiLenguajeParser.ForInitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLlamada(MiLenguajeParser.LlamadaContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -167,6 +227,18 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArgumentos(MiLenguajeParser.ArgumentosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMulDivExpr(MiLenguajeParser.MulDivExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMulDivExpr(MiLenguajeParser.MulDivExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -208,30 +280,6 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMulDiv(MiLenguajeParser.MulDivContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMulDiv(MiLenguajeParser.MulDivContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAddSub(MiLenguajeParser.AddSubContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAddSub(MiLenguajeParser.AddSubContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterParentesis(MiLenguajeParser.ParentesisContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -239,6 +287,30 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParentesis(MiLenguajeParser.ParentesisContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIgualExpr(MiLenguajeParser.IgualExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIgualExpr(MiLenguajeParser.IgualExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMasMenosExpr(MiLenguajeParser.MasMenosExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMasMenosExpr(MiLenguajeParser.MasMenosExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
