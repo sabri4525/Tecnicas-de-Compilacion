@@ -54,7 +54,7 @@ public class App {
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             tokens.fill();
 
-            System.out.println("\n=== ANÁLISIS LÉXICO ===");
+            System.out.println("\n=== ANALISIS LEXICO ===");
             System.out.printf("%-20s %-30s %-10s %-10s\n", "TIPO", "LEXEMA", "LÍNEA", "COLUMNA");
             System.out.println("-------------------------------------------------------------------");
 
@@ -67,10 +67,10 @@ public class App {
                 }
             }
 
-            System.out.println("\n✅ Análisis léxico completado sin errores.");
+            System.out.println("\n Análisis léxico completado sin errores.");
 
         } catch (RuntimeException e) {
-            System.out.println("\n❌ " + e.getMessage());
+            System.out.println("\n " + e.getMessage());
         }
     }
 
@@ -88,22 +88,27 @@ public class App {
 
             ParseTree tree = parser.programa(); // Asegúrate de que "programa" sea la regla inicial
 
-            System.out.println("\n✅ Analisis sintactico completado sin errores.");
+            System.out.println("\n Analisis sintactico completado sin errores.");
             System.out.println("Representacion textual del arbol sintactico:");
             System.out.println(tree.toStringTree(parser));
 
             // Recorrido del árbol con visitor
-            System.out.println("\nEstructura del programa:");
+            System.out.println("\nAnalizando árbol sintáctico...");
+            System.out.println("Arbol sintáctico generado correctamente. Iniciando análisis semántico...");
             ExprVisitor visitor = new ExprVisitor();
             visitor.visit(tree);
 
             // Visualización gráfica del árbol
             generarImagenArbolSintactico(tree, parser);
 
-            realizarAnalisisSemantico(parser); // Análisis semántico después del sintáctico
+            System.out.println("\n=== ANALISIS SEMANTICO ===");
+            realizarAnalisisSemantico(tree); // Análisis semántico después del sintáctico
+
+            System.out.println("\n=== GENERACION DE CODIGO INTERMEDIO ===");
+            generarCodigoIntermedio(tree); // Generación de código intermedio
 
         } catch (RuntimeException e) {
-            System.out.println("\n❌ " + e.getMessage());
+            System.out.println("\n " + e.getMessage());
             System.out.println("El archivo no pudo ser analizado como programa valido.");
         }
     }
@@ -127,7 +132,7 @@ public class App {
             frame.setVisible(true);
 
         } catch (Exception e) {
-            System.out.println("❌ Error al generar la imagen del árbol: " + e.getMessage());
+            System.out.println(" Error al generar la imagen del árbol: " + e.getMessage());
         }
     }
 
@@ -149,9 +154,9 @@ public class App {
         }
     }
 
-    public static void realizarAnalisisSemantico(MiLenguajeParser parser) {
+    public static void realizarAnalisisSemantico(ParseTree tree) {
         AnalizadorSemanticoVisitor visitor = new AnalizadorSemanticoVisitor();
-        visitor.visit(parser.programa());
+        visitor.visit(tree);
         if (!visitor.getErroresSemanticos().isEmpty()) {
             System.out.println("Errores semánticos encontrados:");
             for (String error : visitor.getErroresSemanticos()) {
@@ -175,7 +180,6 @@ class ExprVisitor extends MiLenguajeBaseVisitor<Void> {
     @Override
     public Void visitPrograma(MiLenguajeParser.ProgramaContext ctx) {
         indent();
-        System.out.println("Programa:");
         indentLevel++;
         for (ParseTree child : ctx.children) {
             visit(child);

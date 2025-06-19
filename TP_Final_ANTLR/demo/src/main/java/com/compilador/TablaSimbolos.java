@@ -1,24 +1,44 @@
 package com.compilador;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class TablaSimbolos {
-    private final Map<String, String> simbolos = new HashMap<>();
+    private final Deque<Map<String, String>> pilaScopes = new ArrayDeque<>();
+
+    public TablaSimbolos() {
+        pilaScopes.push(new HashMap<>()); // Scope global
+    }
+
+    public void entrarScope() {
+        pilaScopes.push(new HashMap<>());
+    }
+
+    public void salirScope() {
+        pilaScopes.pop();
+    }
 
     public boolean declarar(String nombre, String tipo) {
-        if (simbolos.containsKey(nombre)) {
-            return false; // Ya declarado
+        Map<String, String> actual = pilaScopes.peek();
+        if (actual.containsKey(nombre)) {
+            return false; // Ya existe en este scope
         }
-        simbolos.put(nombre, tipo);
+        actual.put(nombre, tipo);
         return true;
     }
 
     public boolean existe(String nombre) {
-        return simbolos.containsKey(nombre);
+        for (Map<String, String> scope : pilaScopes) {
+            if (scope.containsKey(nombre))
+                return true;
+        }
+        return false;
     }
 
     public String obtenerTipo(String nombre) {
-        return simbolos.get(nombre);
+        for (Map<String, String> scope : pilaScopes) {
+            if (scope.containsKey(nombre))
+                return scope.get(nombre);
+        }
+        return null;
     }
 }
