@@ -100,6 +100,8 @@ public class App {
             // Visualización gráfica del árbol
             generarImagenArbolSintactico(tree, parser);
 
+            realizarAnalisisSemantico(parser); // Análisis semántico después del sintáctico
+
         } catch (RuntimeException e) {
             System.out.println("\n❌ " + e.getMessage());
             System.out.println("El archivo no pudo ser analizado como programa valido.");
@@ -128,9 +130,39 @@ public class App {
             System.out.println("❌ Error al generar la imagen del árbol: " + e.getMessage());
         }
     }
+
+    public static void generarCodigoIntermedio(ParseTree arbol) {
+        if (arbol == null) {
+            System.err.println("No se puede generar código intermedio: árbol sintáctico nulo.");
+            return;
+        }
+        System.out.println("Generando código intermedio...");
+        GeneradorCodigo generador = new GeneradorCodigo();
+        CodigoVisitor visitor = new CodigoVisitor(generador);
+        visitor.visit(arbol);
+        generador.imprimirCodigo();
+        try {
+            generador.guardarArchivo("codigo_intermedio.txt");
+            System.out.println("Código intermedio generado correctamente.");
+        } catch (IOException e) {
+            System.err.println("Error al guardar el código intermedio: " + e.getMessage());
+        }
+    }
+
+    public static void realizarAnalisisSemantico(MiLenguajeParser parser) {
+        AnalizadorSemanticoVisitor visitor = new AnalizadorSemanticoVisitor();
+        visitor.visit(parser.programa());
+        if (!visitor.getErroresSemanticos().isEmpty()) {
+            System.out.println("Errores semánticos encontrados:");
+            for (String error : visitor.getErroresSemanticos()) {
+                System.out.println(error);
+            }
+        } else {
+            System.out.println("Análisis semántico completado sin errores.");
+        }
+    }
 }
 
-// Visitor de ejemplo (ajusta los métodos según las etiquetas de tu gramática)
 class ExprVisitor extends MiLenguajeBaseVisitor<Void> {
     private int indentLevel = 0;
 

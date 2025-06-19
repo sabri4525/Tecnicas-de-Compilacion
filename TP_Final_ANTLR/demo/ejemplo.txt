@@ -3,38 +3,24 @@ int global = 10;
 double pi = 3.14;
 char letra = 'A';
 
-if (z>10) {
-    z = z - 1;
-} else {
-    z = z + 1;
-}
-
 // Función principal
 int main() {
-    int x = 5, y = 7, z;
-    double d = 2.5;
-    char c = 'b';
+    int x = 5;
+    int z = 0;
+    int y = 10;
 
-    z = suma(x, y);
-
-    if (z > 10) {
-        z = z - 1;
+    if (x <= 10) {
+        z = 1;
     } else {
-        z = z + 1;
+        z = 2;
     }
 
-    while (x < 10) {
+    while (x != 10) {
         x = x + 1;
-        if (x == 8) {
-            break;
-        }
     }
 
     for (int i = 0; i < 5; i = i + 1) {
         y = y + i;
-        if (y > 20) {
-            continue;
-        }
     }
 
     return 0;

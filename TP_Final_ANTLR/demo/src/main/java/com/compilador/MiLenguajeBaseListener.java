@@ -29,18 +29,6 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInicio(MiLenguajeParser.InicioContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInicio(MiLenguajeParser.InicioContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterSentenciaInicial(MiLenguajeParser.SentenciaInicialContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -53,37 +41,13 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclaracion(MiLenguajeParser.DeclaracionContext ctx) { }
+	@Override public void enterFuncionMain(MiLenguajeParser.FuncionMainContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeclaracion(MiLenguajeParser.DeclaracionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterListaDeclaracion(MiLenguajeParser.ListaDeclaracionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitListaDeclaracion(MiLenguajeParser.ListaDeclaracionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeclarador(MiLenguajeParser.DeclaradorContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclarador(MiLenguajeParser.DeclaradorContext ctx) { }
+	@Override public void exitFuncionMain(MiLenguajeParser.FuncionMainContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -144,6 +108,42 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSentencia(MiLenguajeParser.SentenciaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclaracion(MiLenguajeParser.DeclaracionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclaracion(MiLenguajeParser.DeclaracionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListaDeclaracion(MiLenguajeParser.ListaDeclaracionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListaDeclaracion(MiLenguajeParser.ListaDeclaracionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclarador(MiLenguajeParser.DeclaradorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclarador(MiLenguajeParser.DeclaradorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

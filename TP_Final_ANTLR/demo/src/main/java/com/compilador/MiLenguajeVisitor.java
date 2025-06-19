@@ -17,35 +17,17 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrograma(MiLenguajeParser.ProgramaContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiLenguajeParser#inicio}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInicio(MiLenguajeParser.InicioContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#sentenciaInicial}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSentenciaInicial(MiLenguajeParser.SentenciaInicialContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiLenguajeParser#declaracion}.
+	 * Visit a parse tree produced by {@link MiLenguajeParser#funcionMain}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclaracion(MiLenguajeParser.DeclaracionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MiLenguajeParser#listaDeclaracion}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListaDeclaracion(MiLenguajeParser.ListaDeclaracionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MiLenguajeParser#declarador}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDeclarador(MiLenguajeParser.DeclaradorContext ctx);
+	T visitFuncionMain(MiLenguajeParser.FuncionMainContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#funcion}.
 	 * @param ctx the parse tree
@@ -76,6 +58,24 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSentencia(MiLenguajeParser.SentenciaContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#declaracion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclaracion(MiLenguajeParser.DeclaracionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#listaDeclaracion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListaDeclaracion(MiLenguajeParser.ListaDeclaracionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#declarador}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclarador(MiLenguajeParser.DeclaradorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#asignacion}.
 	 * @param ctx the parse tree

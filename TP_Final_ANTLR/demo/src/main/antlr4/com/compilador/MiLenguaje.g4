@@ -1,18 +1,16 @@
 grammar MiLenguaje;
 
 // Regla inicial
-programa: (inicio)* EOF;
-
-// Inicio del programa
-inicio: sentenciaInicial | funcion;
+programa: (sentenciaInicial | funcionMain)* EOF;
 
 // Sentencia inicial 
-sentenciaInicial: declaracion | asignacion PYC | llamada PYC;
+sentenciaInicial:
+	declaracion
+	| asignacion PYC
+	| llamada PYC
+	| funcion PYC;
 
-// Declaraciones
-declaracion: tipo listaDeclaracion PYC;
-listaDeclaracion: declarador (COMA declarador)*;
-declarador: ID (IGUAL expresion)?;
+funcionMain: tipo MAIN PIZQ parametros? PDER bloque;
 
 // Declaración de función
 funcion: tipo ID PIZQ parametros? PDER bloque;
@@ -22,25 +20,32 @@ parametros: parametro (COMA parametro)*;
 parametro: tipo ID;
 
 // Bloque de sentencias
-bloque: CIZQ sentencia* CDER;
+bloque: LLIZQ sentencia* LLDER;
 
 // Sentencias
 sentencia:
-	ifStmt
+	declaracion
+	| asignacion PYC
+	| ifStmt
 	| whileStmt
 	| forStmt
 	| BREAK PYC
 	| CONTINUE PYC
 	| RETURN expresion? PYC
 	| bloque
+	| llamada PYC
 	| expresion PYC;
+
+// Declaraciones
+declaracion: tipo listaDeclaracion PYC;
+listaDeclaracion: declarador (COMA declarador)*;
+declarador: ID (IGUAL expresion)?;
 
 // Asignación
 asignacion: ID IGUAL expresion;
 
 // If-Else
-ifStmt:
-	IF PIZQ expresion PDER CIZQ sentencia CDER (ELSE sentencia)?;
+ifStmt: IF PIZQ expresion PDER sentencia (ELSE sentencia)?;
 
 // While
 whileStmt: WHILE PIZQ expresion PDER sentencia;
@@ -84,8 +89,8 @@ COMA: ',';
 IGUAL: '=';
 PIZQ: '(';
 PDER: ')';
-CIZQ: '{';
-CDER: '}';
+LLIZQ: '{';
+LLDER: '}';
 MAS: '+';
 MENOS: '-';
 MUL: '*';
@@ -100,6 +105,7 @@ AND: '&&';
 OR: '||';
 
 // Palabras reservadas
+MAIN: 'main';
 IF: 'if';
 ELSE: 'else';
 WHILE: 'while';
