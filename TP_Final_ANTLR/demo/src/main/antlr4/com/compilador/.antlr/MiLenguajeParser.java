@@ -119,14 +119,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_programa; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterPrograma(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitPrograma(this);
-		}
 	}
 
 	public final ProgramaContext programa() throws RecognitionException {
@@ -177,14 +169,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_inicio; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterInicio(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitInicio(this);
-		}
 	}
 
 	public final InicioContext inicio() throws RecognitionException {
@@ -237,14 +221,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_sentenciaInicial; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterSentenciaInicial(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitSentenciaInicial(this);
-		}
 	}
 
 	public final SentenciaInicialContext sentenciaInicial() throws RecognitionException {
@@ -305,14 +281,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declaracion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterDeclaracion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitDeclaracion(this);
-		}
 	}
 
 	public final DeclaracionContext declaracion() throws RecognitionException {
@@ -356,14 +324,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_listaDeclaracion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterListaDeclaracion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitListaDeclaracion(this);
-		}
 	}
 
 	public final ListaDeclaracionContext listaDeclaracion() throws RecognitionException {
@@ -415,14 +375,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declarador; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterDeclarador(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitDeclarador(this);
-		}
 	}
 
 	public final DeclaradorContext declarador() throws RecognitionException {
@@ -477,14 +429,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_funcion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterFuncion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitFuncion(this);
-		}
 	}
 
 	public final FuncionContext funcion() throws RecognitionException {
@@ -543,14 +487,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parametros; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterParametros(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitParametros(this);
-		}
 	}
 
 	public final ParametrosContext parametros() throws RecognitionException {
@@ -601,14 +537,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parametro; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterParametro(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitParametro(this);
-		}
 	}
 
 	public final ParametroContext parametro() throws RecognitionException {
@@ -648,14 +576,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bloque; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterBloque(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitBloque(this);
-		}
 	}
 
 	public final BloqueContext bloque() throws RecognitionException {
@@ -721,14 +641,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_sentencia; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterSentencia(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitSentencia(this);
-		}
 	}
 
 	public final SentenciaContext sentencia() throws RecognitionException {
@@ -842,14 +754,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_asignacion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterAsignacion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitAsignacion(this);
-		}
 	}
 
 	public final AsignacionContext asignacion() throws RecognitionException {
@@ -898,14 +802,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ifStmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterIfStmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitIfStmt(this);
-		}
 	}
 
 	public final IfStmtContext ifStmt() throws RecognitionException {
@@ -969,14 +865,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_whileStmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterWhileStmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitWhileStmt(this);
-		}
 	}
 
 	public final WhileStmtContext whileStmt() throws RecognitionException {
@@ -1033,14 +921,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_forStmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterForStmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitForStmt(this);
-		}
 	}
 
 	public final ForStmtContext forStmt() throws RecognitionException {
@@ -1120,14 +1000,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_forInit; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterForInit(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitForInit(this);
-		}
 	}
 
 	public final ForInitContext forInit() throws RecognitionException {
@@ -1183,14 +1055,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_llamada; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterLlamada(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitLlamada(this);
-		}
 	}
 
 	public final LlamadaContext llamada() throws RecognitionException {
@@ -1245,14 +1109,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_argumentos; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterArgumentos(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitArgumentos(this);
-		}
 	}
 
 	public final ArgumentosContext argumentos() throws RecognitionException {
@@ -1317,27 +1173,11 @@ public class MiLenguajeParser extends Parser {
 		public TerminalNode MUL() { return getToken(MiLenguajeParser.MUL, 0); }
 		public TerminalNode DIV() { return getToken(MiLenguajeParser.DIV, 0); }
 		public MulDivExprContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterMulDivExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitMulDivExpr(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IdExprContext extends ExpresionContext {
 		public TerminalNode ID() { return getToken(MiLenguajeParser.ID, 0); }
 		public IdExprContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterIdExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitIdExpr(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class RelacionalContext extends ExpresionContext {
@@ -1355,27 +1195,11 @@ public class MiLenguajeParser extends Parser {
 		public TerminalNode IGUAL_IGUAL() { return getToken(MiLenguajeParser.IGUAL_IGUAL, 0); }
 		public TerminalNode DISTINTO() { return getToken(MiLenguajeParser.DISTINTO, 0); }
 		public RelacionalContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterRelacional(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitRelacional(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class NumExprContext extends ExpresionContext {
 		public TerminalNode NUM() { return getToken(MiLenguajeParser.NUM, 0); }
 		public NumExprContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterNumExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitNumExpr(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ParentesisContext extends ExpresionContext {
@@ -1385,14 +1209,6 @@ public class MiLenguajeParser extends Parser {
 		}
 		public TerminalNode PDER() { return getToken(MiLenguajeParser.PDER, 0); }
 		public ParentesisContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterParentesis(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitParentesis(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IgualExprContext extends ExpresionContext {
@@ -1404,14 +1220,6 @@ public class MiLenguajeParser extends Parser {
 		}
 		public TerminalNode IGUAL() { return getToken(MiLenguajeParser.IGUAL, 0); }
 		public IgualExprContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterIgualExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitIgualExpr(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class MasMenosExprContext extends ExpresionContext {
@@ -1425,27 +1233,11 @@ public class MiLenguajeParser extends Parser {
 		public TerminalNode MAS() { return getToken(MiLenguajeParser.MAS, 0); }
 		public TerminalNode MENOS() { return getToken(MiLenguajeParser.MENOS, 0); }
 		public MasMenosExprContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterMasMenosExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitMasMenosExpr(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class CharExprContext extends ExpresionContext {
 		public TerminalNode CHAR() { return getToken(MiLenguajeParser.CHAR, 0); }
 		public CharExprContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterCharExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitCharExpr(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LlamadaExprContext extends ExpresionContext {
@@ -1453,14 +1245,6 @@ public class MiLenguajeParser extends Parser {
 			return getRuleContext(LlamadaContext.class,0);
 		}
 		public LlamadaExprContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterLlamadaExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitLlamadaExpr(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LogicaContext extends ExpresionContext {
@@ -1474,14 +1258,6 @@ public class MiLenguajeParser extends Parser {
 		public TerminalNode AND() { return getToken(MiLenguajeParser.AND, 0); }
 		public TerminalNode OR() { return getToken(MiLenguajeParser.OR, 0); }
 		public LogicaContext(ExpresionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterLogica(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitLogica(this);
-		}
 	}
 
 	public final ExpresionContext expresion() throws RecognitionException {
@@ -1692,14 +1468,6 @@ public class MiLenguajeParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_tipo; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterTipo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitTipo(this);
-		}
 	}
 
 	public final TipoContext tipo() throws RecognitionException {
