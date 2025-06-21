@@ -22,7 +22,17 @@ public class GeneradorCodigo {
     }
 
     public void agregarEtiqueta(String etiqueta) {
-        instrucciones.add("    " + etiqueta + ":");
+        String etiquetaFormateada = "    " + etiqueta + ":";
+        // No agregar si la última instrucción ya es esa etiqueta
+        if (!instrucciones.isEmpty() && instrucciones.get(instrucciones.size() - 1).trim().equals(etiqueta + ":")) {
+            return;
+        }
+        // No agregar si la última instrucción también es una etiqueta (evita etiquetas
+        // seguidas)
+        if (!instrucciones.isEmpty() && instrucciones.get(instrucciones.size() - 1).trim().endsWith(":")) {
+            return;
+        }
+        instrucciones.add(etiquetaFormateada);
     }
 
     public void pushBreak(String etiqueta) {

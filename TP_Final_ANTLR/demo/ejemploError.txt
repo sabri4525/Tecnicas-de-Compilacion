@@ -1,47 +1,43 @@
-// Declaración de función con parámetros y retorno
-int suma(int a, int b) {
-    int resultado = a + b
-    return resultado;
-}
-
-// Declaración de función sin retorno
-void imprimirSuma(int x, int y) {
-    int s = suma(x, y);
-    // Aquí podrías tener una función print si la agregas a tu lenguaje
-}
+// Ejemplo para probar todos los warnings
 
 // Declaración de variables globales
-int global = 10
-double pi = 3.14;
-char letra = 'A';
+int global = 10;
+double unused_var = 3.14;  // Warning: variable declarada pero nunca usada
 
 // Función principal
 int main() {
-    int x = 5, y = 7, z;
-    double d = 2.5;
-    char c = 'b';
-
-    z = suma(x, y);
-
-    if (z > 10 {
-        z = z - 1;
-    } else {
-        z = z + 1;
+    // Warning: variable declarada pero nunca usada
+    char letter = 'A';
+    
+    // Warning: variable usada sin inicializar
+    int x;
+    int result = x + 5;  // x no fue inicializada
+    
+    // Warning: conversión implícita de tipos
+    double pi = 3.14;
+    int truncated = pi;  // double -> int (pérdida de precisión)
+    
+    // Warning: división por cero
+    int division = 10 / 0;
+    
+    // Warning: asignación en lugar de comparación
+    int y = 5;
+    if (y = 10) {  // Debería ser y == 10
+        y = 20;
     }
-
-    while (x < 10) {
-        x = x + 1
-        if (x == 8) {
-            break;
-        }
+    
+    // Código válido que se ejecuta
+    int z = 15;
+    z = z + 1;
+    
+    // Warning: código inalcanzable
+    return 0;
+    
+    // Todo lo siguiente es código inalcanzable
+    int dead_code = 999;  // Warning: código después de return
+    z = z + 100;          // Warning: código después de return
+    
+    if (z > 10) {         // Warning: código después de return
+        z = 0;
     }
-
-    for (int i = 0; i < 5; i = i + 1) {
-        y = y + i;
-        if (y > 20) {
-            continue
-        }
-    }
-
-    return 0
 }

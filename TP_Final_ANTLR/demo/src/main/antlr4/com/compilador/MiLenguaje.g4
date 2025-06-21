@@ -8,7 +8,7 @@ sentenciaInicial:
 	declaracion
 	| asignacion PYC
 	| llamada PYC
-	| funcion PYC;
+	| funcion;
 
 funcionMain: tipo MAIN PIZQ parametros? PDER bloque;
 

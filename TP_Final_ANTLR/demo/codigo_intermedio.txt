@@ -1,0 +1,46 @@
+  0: t0 = a + b
+  1: resultado = t0
+  2: return resultado
+  3: t1 = call suma(x, y)
+  4: s = t1
+  5: global = 10
+  6: pi = 3.14
+  7: letra = 'A'
+  8: x = 5
+  9: y = 7
+ 10: t2 = call suma(x, y)
+ 11: z = t2
+ 12: t3 = z > 10
+ 13: if !t3 goto L0
+ 14: t4 = z - 1
+ 15: z = t4
+ 16: goto L1
+    L0:
+ 18: t5 = z + 1
+ 19: z = t5
+    L1:
+ 21: t6 = x < 10
+ 22: if !t6 goto L3
+ 23: t7 = x + 1
+ 24: x = t7
+ 25: t8 = x == 8
+ 26: if !t8 goto L4
+ 27: goto L3
+    L4:
+ 29: goto L2
+    L3:
+ 31: i = 0
+    L5:
+ 33: t9 = i < 5
+ 34: if !t9 goto L6
+ 35: t10 = y + i
+ 36: y = t10
+ 37: t11 = y > 20
+ 38: if !t11 goto L7
+ 39: goto L5
+    L7:
+ 41: t12 = i + 1
+ 42: i = t12
+ 43: goto L5
+    L6:
+ 45: return 0

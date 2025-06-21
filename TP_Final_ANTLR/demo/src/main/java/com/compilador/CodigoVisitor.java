@@ -200,9 +200,6 @@ public class CodigoVisitor extends MiLenguajeBaseVisitor<String> {
             gen.agregar("return" + (valor.isEmpty() ? "" : " " + valor));
             return null;
         }
-        // Otros casos: bloque, expresion, etc.
         return super.visitSentencia(ctx);
     }
-
-    // Puedes agregar más métodos visit según lo que necesites...
 }
