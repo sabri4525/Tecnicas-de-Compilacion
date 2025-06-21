@@ -139,7 +139,7 @@ public class AnalizadorSemanticoVisitor extends MiLenguajeBaseVisitor<Void> {
                         + ctx.start.getLine() + ")");
             }
         }
-        return null;
+        return visitChildren(ctx);
     }
 
     /**
