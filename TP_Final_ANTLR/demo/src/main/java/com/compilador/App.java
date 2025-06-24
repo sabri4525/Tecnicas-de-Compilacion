@@ -2,188 +2,249 @@ package com.compilador;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
-import org.antlr.v4.gui.TreeViewer;
-
-import javax.swing.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.swing.*;
+import org.antlr.v4.gui.TreeViewer;
 
 public class App {
     public static void main(String[] args) {
         if (args.length != 1) {
-            System.out.println("Uso: java -jar demo-1.0-jar-with-dependencies.jar <archivo.txt>");
-            System.exit(1);
+            System.err.println("Uso: java -jar demo.jar <archivo>");
+            return;
         }
 
+        String nombreArchivo = args[0];
+
         try {
-            System.out.println("Analizando archivo: " + args[0]);
+            // FASE 1: ANÁLISIS LÉXICO
+            System.out.println("=== ANALISIS LEXICO ===");
+            CharStream input = CharStreams.fromFileName(nombreArchivo);
+            realizarAnalisisLexico(input);
 
-            CharStream inputLexico = CharStreams.fromFileName(args[0]);
-            realizarAnalisisLexico(inputLexico);
+            // FASE 2: ANÁLISIS SINTÁCTICO
+            System.out.println("\n=== ANALISIS SINTACTICO ===");
+            ParseTree tree = realizarAnalisisSintactico(CharStreams.fromFileName(nombreArchivo));
 
-            CharStream inputSintactico = CharStreams.fromFileName(args[0]);
-            realizarAnalisisSintactico(inputSintactico);
+            if (tree != null) {
+                // FASE 3: ANÁLISIS SEMÁNTICO
+                System.out.println("\n=== ANALISIS SEMANTICO ===");
+                realizarAnalisisSemantico(tree);
+            }
 
-        } catch (IOException e) {
-            System.err.println("❌ Error al leer el archivo: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("❌ Error inesperado: " + e.getMessage());
+            System.err.println("Error al procesar el archivo: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private static void realizarAnalisisLexico(CharStream input) {
+    /**
+     * FASE 1: Realiza el análisis léxico y muestra los tokens
+     */
+    public static void realizarAnalisisLexico(CharStream input) {
         MiLenguajeLexer lexer = new MiLenguajeLexer(input);
 
-        List<String> errores = new ArrayList<>();
+        // Agregar listener personalizado para errores léxicos
+        final boolean[] hayErroresLexicos = { false };
         lexer.removeErrorListeners();
         lexer.addErrorListener(new BaseErrorListener() {
             @Override
             public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol,
                     int line, int charPositionInLine, String msg, RecognitionException e) {
-                String errorMsg = "ERROR LÉXICO en línea " + line + ":" + charPositionInLine +
-                        " - " + msg;
-                errores.add(errorMsg);
-                throw new RuntimeException(errorMsg);
+                hayErroresLexicos[0] = true;
+                System.err.println("\u001B[31m¡Error léxico encontrado!\u001B[0m");
+                System.err.println("Línea " + line + ", columna " + charPositionInLine + ": " + msg);
             }
         });
 
-        try {
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            tokens.fill();
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        tokens.fill(); // Llenar el stream de tokens
 
-            System.out.println("\n=== ANALISIS LEXICO ===");
-            System.out.printf("%-20s %-30s %-10s %-10s\n", "TIPO", "LEXEMA", "LÍNEA", "COLUMNA");
-            System.out.println("-------------------------------------------------------------------");
+        System.out.println("Tokens encontrados:");
+        System.out.println("┌──────────────────────┬──────────────────────┬─────────┬─────────┐");
+        System.out.println("│ TIPO                 │ TEXTO                │ LÍNEA   │ COLUMNA │");
+        System.out.println("├──────────────────────┼──────────────────────┼─────────┼─────────┤");
 
-            for (Token token : tokens.getTokens()) {
-                if (token.getType() != Token.EOF) {
-                    String tokenName = MiLenguajeLexer.VOCABULARY.getSymbolicName(token.getType());
-                    System.out.printf("%-20s %-30s %-10d %-10d\n",
-                            tokenName, token.getText(), token.getLine(),
-                            token.getCharPositionInLine());
+        for (Token token : tokens.getTokens()) {
+            if (token.getType() != Token.EOF) {
+                String tipoToken = lexer.getVocabulary().getSymbolicName(token.getType());
+                if (tipoToken == null) {
+                    tipoToken = "'" + token.getText() + "'";
                 }
+
+                System.out.printf("│ %-20s │ %-20s │ %-7d │ %-7d │\n",
+                        tipoToken,
+                        token.getText().length() > 20 ? token.getText().substring(0, 17) + "..." : token.getText(),
+                        token.getLine(),
+                        token.getCharPositionInLine());
             }
+        }
 
-            System.out.println("\n Análisis léxico completado sin errores.");
+        System.out.println("└──────────────────────┴──────────────────────┴─────────┴─────────┘");
+        System.out.println("Total de tokens: " + (tokens.getTokens().size() - 1)); // -1 para no contar EOF
 
-        } catch (RuntimeException e) {
-            System.out.println("\n " + e.getMessage());
+        // Verificar errores léxicos
+        if (hayErroresLexicos[0]) {
+            System.err.println("\u001B[31m¡Errores léxicos encontrados!\u001B[0m");
+        } else {
+            System.out.println("\u001B[32mAnálisis léxico completado sin errores.\u001B[0m");
         }
     }
 
-    private static void realizarAnalisisSintactico(CharStream input) {
+    /**
+     * FASE 2: Realiza el análisis sintáctico y construye el árbol
+     */
+    public static ParseTree realizarAnalisisSintactico(CharStream input) {
         MiLenguajeLexer lexer = new MiLenguajeLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MiLenguajeParser parser = new MiLenguajeParser(tokens);
 
-        parser.removeErrorListeners();
-        parser.addErrorListener(new MiErrorListener()); // Usa tu listener personalizado
+        // Agregar listener personalizado para errores sintácticos
+        parser.removeErrorListeners(); // Remover el listener por defecto
+        parser.addErrorListener(new BaseErrorListener() {
+            @Override
+            public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol,
+                    int line, int charPositionInLine, String msg, RecognitionException e) {
+                System.err.println("\u001B[31m¡Error sintáctico encontrado!\u001B[0m");
+                System.err.println("Línea " + line + ", columna " + charPositionInLine + ":");
+                System.err.println("Símbolo inesperado '" + offendingSymbol + "' " + msg);
+            }
+        });
 
-        try {
-            System.out.println("\n=== ANALISIS SINTACTICO ===");
-            System.out.println("Intentando analizar el archivo como programa...");
+        // Construir el árbol sintáctico
+        ParseTree tree = parser.programa();
 
-            ParseTree tree = parser.programa(); // Asegúrate de que "programa" sea la regla inicial
-
-            System.out.println("\n Analisis sintactico completado sin errores.");
-            System.out.println("Representacion textual del arbol sintactico:");
-            System.out.println(tree.toStringTree(parser));
-
-            // Recorrido del árbol con visitor
-            System.out.println("\nAnalizando árbol sintáctico...");
-            System.out.println("Arbol sintáctico generado correctamente. Iniciando análisis semántico...");
-            ExprVisitor visitor = new ExprVisitor();
-            visitor.visit(tree);
-
-            // Visualización gráfica del árbol
-            generarImagenArbolSintactico(tree, parser);
-
-            System.out.println("\n=== ANALISIS SEMANTICO ===");
-            realizarAnalisisSemantico(tree); // Análisis semántico después del sintáctico
-
-        } catch (RuntimeException e) {
-            System.out.println("\n " + e.getMessage());
-            System.out.println("El archivo no pudo ser analizado como programa valido.");
+        if (parser.getNumberOfSyntaxErrors() > 0) {
+            System.err.println("\u001B[31mSe encontraron errores sintácticos. No se puede continuar.\u001B[0m");
+            return null;
         }
+
+        if (tree == null) {
+            System.err.println("\u001B[31mError: No se pudo construir el arbol sintactico.\u001B[0m");
+            return null;
+        }
+
+        System.out.println("\u001B[32mAnálisis sintáctico completado exitosamente.\u001B[0m");
+        System.out.println("Arbol sintactico construido correctamente.");
+
+        // Mostrar representación textual del árbol
+        mostrarDiagramaArbol(tree, parser);
+
+        return tree;
     }
 
-    private static void generarImagenArbolSintactico(ParseTree tree, MiLenguajeParser parser) {
-        try {
-            JFrame frame = new JFrame("Árbol Sintáctico");
-            JPanel panel = new JPanel();
-
-            TreeViewer viewer = new TreeViewer(Arrays.asList(parser.getRuleNames()), tree);
-            viewer.setScale(1.5);
-            panel.add(viewer);
-
-            JScrollPane scrollPane = new JScrollPane(panel);
-            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-            frame.add(scrollPane);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(800, 600);
-            frame.setVisible(true);
-
-        } catch (Exception e) {
-            System.out.println(" Error al generar la imagen del árbol: " + e.getMessage());
-        }
-    }
-
-    public static void generarCodigoIntermedio(ParseTree arbol) {
-        if (arbol == null) {
-            System.err.println("No se puede generar código intermedio: árbol sintáctico nulo.");
-            return;
-        }
-        System.out.println("Generando código intermedio...");
-        GeneradorCodigo generador = new GeneradorCodigo();
-        CodigoVisitor visitor = new CodigoVisitor(generador);
-        visitor.visit(arbol);
-        generador.imprimirCodigo();
-        try {
-            generador.guardarArchivo("codigo_intermedio.txt");
-            System.out.println("Código intermedio generado correctamente.");
-        } catch (IOException e) {
-            System.err.println("Error al guardar el código intermedio: " + e.getMessage());
-        }
-    }
-
+    /**
+     * FASE 3: Ejecuta el análisis semántico verificando errores y warnings
+     */
     public static void realizarAnalisisSemantico(ParseTree tree) {
         AnalizadorSemanticoVisitor visitor = new AnalizadorSemanticoVisitor();
         visitor.visit(tree);
 
-        // Verificar variables no usadas al final
+        // Verificar variables no usadas
         visitor.verificarVariablesNoUsadas();
 
-        // Mostrar errores
+        // Mostrar errores semánticos
         if (!visitor.getErroresSemanticos().isEmpty()) {
-            System.out.println("\u001B[31mErrores semánticos encontrados:\u001B[0m");
+            System.out.println("\n=== ERRORES SEMÁNTICOS ===");
             for (String error : visitor.getErroresSemanticos()) {
-                System.out.println("\u001B[31m" + error + "\u001B[0m");
+                System.err.println("\u001B[31m" + error + "\u001B[0m");
             }
         }
 
-        // Mostrar warnings
+        // Mostrar warnings semánticos
         if (!visitor.getWarningsSemanticos().isEmpty()) {
-            System.out.println("\u001B[33mWarnings semánticos encontrados:\u001B[0m");
+            System.out.println("\n=== WARNINGS SEMANTICOS ===");
             for (String warning : visitor.getWarningsSemanticos()) {
                 System.out.println("\u001B[33m" + warning + "\u001B[0m");
             }
         }
 
+        // Resumen del análisis
         if (visitor.getErroresSemanticos().isEmpty() && visitor.getWarningsSemanticos().isEmpty()) {
             System.out.println("\u001B[32mAnálisis semántico completado sin errores ni warnings.\u001B[0m");
+        } else if (visitor.getErroresSemanticos().isEmpty()) {
+            System.out.println("\u001B[32mAnálisis semántico completado sin errores.\u001B[0m");
+            System.out.println(
+                    "\u001B[33mSe encontraron " + visitor.getWarningsSemanticos().size() + " warnings.\u001B[0m");
+        } else {
+            System.out.println("\u001B[31mSe encontraron " + visitor.getErroresSemanticos().size()
+                    + " errores semánticos.\u001B[0m");
+            if (!visitor.getWarningsSemanticos().isEmpty()) {
+                System.out.println("\u001B[33mTambién se encontraron " + visitor.getWarningsSemanticos().size()
+                        + " warnings.\u001B[0m");
+            }
         }
 
-        // *** SOLO GENERAR CÓDIGO SI NO HAY ERRORES ***
+        // Mostrar y guardar tabla de símbolos
+        TablaSimbolos tablaSimbolos = visitor.getTablaSimbolos();
+        tablaSimbolos.imprimirTabla();
+
+        try {
+            tablaSimbolos.guardarArchivo("tabla_simbolos.txt");
+            System.out.println("Tabla de simbolos guardada en 'tabla_simbolos.txt'");
+        } catch (IOException e) {
+            System.err.println("Error al guardar la tabla de simbolos: " + e.getMessage());
+        }
+
+        // FASE 4: Solo genera código intermedio si no hay errores
         if (visitor.getErroresSemanticos().isEmpty()) {
             System.out.println("\n=== GENERACION DE CODIGO INTERMEDIO ===");
             generarCodigoIntermedio(tree);
         } else {
-            System.out.println("\n\u001B[31mNo se generó código intermedio debido a errores semánticos.\u001B[0m");
+            System.out.println("\n\u001B[31mNo se genero codigo intermedio debido a errores semanticos.\u001B[0m");
+        }
+    }
+
+    /**
+     * FASE 4: Coordina la generación de código intermedio y su almacenamiento
+     */
+    public static void generarCodigoIntermedio(ParseTree arbol) {
+        // Verificación adicional de seguridad
+        if (arbol == null) {
+            System.err.println("No se puede generar codigo intermedio: arbol sintactico nulo.");
+            return;
+        }
+
+        System.out.println("Generando codigo intermedio...");
+        GeneradorCodigo generador = new GeneradorCodigo();
+        CodigoVisitor visitor = new CodigoVisitor(generador);
+        visitor.visit(arbol);
+        generador.imprimirCodigo();
+
+        try {
+            generador.guardarArchivo("codigo_intermedio.txt");
+            System.out.println("Codigo intermedio guardado en 'codigo_intermedio.txt'");
+            System.out.println("\u001B[32mCodigo intermedio generado correctamente.\u001B[0m");
+        } catch (IOException e) {
+            System.err.println("Error al guardar el codigo intermedio: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Muestra el diagrama visual del árbol sintáctico en una ventana
+     */
+    private static void mostrarDiagramaArbol(ParseTree tree, MiLenguajeParser parser) {
+        try {
+            // Crear el visor del árbol
+            TreeViewer viewer = new TreeViewer(java.util.Arrays.asList(parser.getRuleNames()), tree);
+            viewer.setScale(1.5);
+
+            // Crear la ventana
+            JFrame frame = new JFrame("Arbol Sintactico");
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setSize(800, 600);
+            frame.setLocationRelativeTo(null);
+
+            // Agregar el visor con scroll
+            JScrollPane scrollPane = new JScrollPane(viewer);
+            frame.add(scrollPane);
+
+            // Mostrar la ventana
+            frame.setVisible(true);
+
+            System.out.println("Diagrama del arbol sintactico abierto en nueva ventana.");
+
+        } catch (Exception e) {
+            System.err.println("Error al mostrar el diagrama del arbol: " + e.getMessage());
         }
     }
 }

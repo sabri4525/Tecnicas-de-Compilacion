@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<<<<<<< HEAD
-<testsuite tests="1" failures="0" name="com.tpfinal.compiler.AppTest" time="0.002" errors="0" skipped="0">
-=======
-<testsuite tests="1" failures="0" name="com.tpfinal.compiler.AppTest" time="0" errors="0" skipped="0">
->>>>>>> d77e18ab35df4c07b9082e75713f6ecfe5465142
+<testsuite tests="1" failures="0" name="com.tpfinal.compiler.AppTest" time="0.001" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="24.0.1+9-30"/>
@@ -65,9 +61,5 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-<<<<<<< HEAD
-  <testcase classname="com.tpfinal.compiler.AppTest" name="testApp" time="0.002"/>
-=======
-  <testcase classname="com.tpfinal.compiler.AppTest" name="testApp" time="0"/>
->>>>>>> d77e18ab35df4c07b9082e75713f6ecfe5465142
+  <testcase classname="com.tpfinal.compiler.AppTest" name="testApp" time="0.001"/>
 </testsuite>

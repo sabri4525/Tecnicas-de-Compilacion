@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.tpfinal.compiler.AppTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
->>>>>>> d77e18ab35df4c07b9082e75713f6ecfe5465142
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec

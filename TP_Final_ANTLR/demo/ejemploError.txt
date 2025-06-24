@@ -1,43 +1,226 @@
-// Ejemplo para probar todos los warnings
+// ===============================================
+// EJEMPLO COMPLETO DE WARNINGS EN TODOS LOS ÁMBITOS
+// ===============================================
 
-// Declaración de variables globales
-int global = 10;
-double unused_var = 3.14;  // Warning: variable declarada pero nunca usada
+// ===== ÁMBITO GLOBAL =====
+// Warning: Variables globales no usadas
+int globalNoUsada = 10;
+double piNoUsada = 3.14;
+char letraNoUsada = 'A';
 
-// Función principal
+// Variables globales que SÍ se usan
+int globalUsada = 100;
+double valorGlobal = 2.5;
+
+// ===== FUNCIONES CON TODOS LOS TIPOS DE WARNINGS =====
+
+// Función que demuestra TODOS los warnings posibles
+int funcionCompleta(int parametroNoUsado, double otroParametroNoUsado) {
+    // Warning: Variables declaradas pero nunca usadas
+    int variableNoUsada = 10;
+    char caracterNoUsado = 'X';
+    double decimalNoUsado = 1.5;
+    
+    // Warning: Variables no inicializadas al ser usadas
+    int sinInicializar;
+    double otroSinInicializar;
+    
+    // Warning: Conversión implícita de int a double
+    double numeroDecimal = 5;
+    
+    // Warning: Conversión implícita de char a int
+    int numeroDesdeChar = 'Z';
+    
+    // Warning: Conversión implícita de char a double
+    double decimalDesdeChar = 'A';
+    
+    // Warning: División por cero detectada
+    int division = 100 / 0;
+    
+    // Warning: Variables usadas sin inicializar
+    int resultado = sinInicializar + 5;
+    double otroResultado = otroSinInicializar * 2.0;
+    
+    // Warning: Posible asignación en lugar de comparación
+    if (resultado = 200) {
+        int dentroIf = 1;
+        // Warning: variable local del if no usada
+        int localIfNoUsada = 5;
+    }
+    
+    return resultado;
+    
+    // Warning: Código inalcanzable después de return
+    int inalcanzable = 999;
+}
+
+// Función con warning de conversión implícita en return
+double funcionConReturnImplicito() {
+    int entero = 42;
+    // Warning: Conversión implícita en return de int a double
+    return entero;
+}
+
+// Función void con warning de return con valor
+void funcionVoidMal() {
+    int valor = 10;
+    // Error: Función void no puede retornar un valor
+    return valor;
+}
+
+// Función sin return requerido
+int funcionSinReturn(int x) {
+    int y = x + 1;
+    // Error: Función de tipo 'int' debe retornar un valor
+    // (falta return)
+}
+
+// Función con parámetros duplicados
+int funcionParametrosDuplicados(int a, int a) {
+    return a + 1;
+}
+
+// ===== FUNCIÓN MAIN CON WARNINGS EN DIFERENTES CONTEXTOS =====
 int main() {
-    // Warning: variable declarada pero nunca usada
-    char letter = 'A';
+    // Warning: Variable declarada sin inicializar, luego usada
+    int numero1;
+    int numero2;
+    double decimal1;
     
-    // Warning: variable usada sin inicializar
-    int x;
-    int result = x + 5;  // x no fue inicializada
+    // Variables que SÍ se usan
+    int x = 5;
+    int y = 7;
+    int z;
     
-    // Warning: conversión implícita de tipos
-    double pi = 3.14;
-    int truncated = pi;  // double -> int (pérdida de precisión)
+    // Warning: Variable declarada pero nunca usada
+    char caracterMainNoUsado = 'M';
+    double decimalMainNoUsado = 9.99;
     
-    // Warning: división por cero
-    int division = 10 / 0;
+    // Usar variable global (para que no aparezca como no usada)
+    x = globalUsada + 1;
     
-    // Warning: asignación en lugar de comparación
-    int y = 5;
-    if (y = 10) {  // Debería ser y == 10
-        y = 20;
+    // Warning: Uso de variable no inicializada
+    int suma = numero1 + 5;
+    
+    // Warning: Conversión implícita en asignación
+    double conversion = x;  // int a double
+    int conversionPeligrosa = 'B';  // char a int
+    
+    // Llamadas a funciones con warnings
+    z = funcionCompleta(x, 2.5);
+    
+    // Warning: Número incorrecto de parámetros
+    int mal = funcionCompleta(x); 
+    
+    // Warning: Conversión implícita en llamada a función
+    double resultadoFuncion = funcionCompleta(x, y);  // y es int, se espera double
+    
+    // ===== WARNINGS EN BLOQUES IF/ELSE =====
+    if (z > 10) {
+        // Warning: Variable local del bloque no usada
+        int localIfNoUsada = 100;
+        int usadaEnIf = 200;
+        z = usadaEnIf - 1;
+    } else {
+        // Warning: Variable local del else no usada
+        char localElseNoUsada = 'E';
+        z = z + 1;
     }
     
-    // Código válido que se ejecuta
-    int z = 15;
-    z = z + 1;
-    
-    // Warning: código inalcanzable
-    return 0;
-    
-    // Todo lo siguiente es código inalcanzable
-    int dead_code = 999;  // Warning: código después de return
-    z = z + 100;          // Warning: código después de return
-    
-    if (z > 10) {         // Warning: código después de return
-        z = 0;
+    // ===== WARNINGS EN BUCLES WHILE =====
+    while (x < 15) {
+        // Warning: Variable local del while no usada
+        int localWhileNoUsada = x * 2;
+        
+        x = x + 1;
+        if (x == 12) {
+            break;
+        }
     }
+    
+    // ===== WARNINGS EN BUCLES FOR =====
+    for (int i = 0; i < 5; i = i + 1) {
+        // Warning: Variable local del for no usada
+        int localForNoUsada = i * 3;
+        char otraLocalFor = 'F';
+        
+        y = y + i;  // usar 'i' para que no dé warning
+        
+        if (y > 25) {
+            continue;
+        }
+    }
+    
+    // ===== FOR CON VARIABLE DUPLICADA =====
+    for (int j = 0; j < 3; j = j + 1) {
+        // Warning: Variable ya declarada en scope superior
+        int x = 999;  // (x ya existe)
+        
+        // Warning: Variable local no usada
+        int temporalFor = j + 10;
+    }
+    
+    // ===== WARNINGS CON OPERACIONES =====
+    // Warning: División por cero en contexto de main
+    int divisionMain = y / 0;
+    
+    // Warning: Conversión implícita en operación
+    double resultadoMixto = x + 3.14;  // int + double
+    
+    // ===== WARNINGS DE VARIABLES NO USADAS AL FINAL =====
+    int temporal1 = 100;
+    char temporal2 = 'T';
+    double temporal3 = 5.5;
+    
+    // Solo usar una para generar warnings de las otras
+    int calculo = temporal1 * 2;
+    
+    // Warning: Uso de variable no inicializada (numero2)
+    int finalCalculo = numero2 + calculo;
+    
+    // ===== CÓDIGO INALCANZABLE =====
+    return finalCalculo;
+    
+    // Warning: Código inalcanzable después de return
+    int codigoMuerto = 666;
+    char masCodigoMuerto = 'D';
+}
+
+// ===== FUNCIÓN ADICIONAL PARA MÁS WARNINGS =====
+void funcionConMasWarnings(int param1, double param2, char param3) {
+    // Warning: Todos los parámetros no usados
+    
+    // Warning: Variables locales no usadas
+    int local1 = 10;
+    double local2 = 20.5;
+    char local3 = 'L';
+    
+    // Warning: Variable no inicializada
+    int noInit;
+    
+    // Warning: División por cero
+    int div = 50 / 0;
+    
+    // Warning: Uso de variable no inicializada
+    int resultado = noInit + div;
+    
+    // Warning: Posible asignación en lugar de comparación
+    if (resultado = 100) {
+        // Warning: Variable del if no usada
+        int dentroIf = 42;
+    }
+    
+    return;
+    
+    // Warning: Código inalcanzable
+    int inalcanzable = 888;
+}
+
+// ===== FUNCIÓN QUE LLAMA A OTRAS (PARA WARNINGS DE LLAMADAS) =====
+double funcionLlamadora() {
+    // Warning: Conversión implícita en llamada (int donde se espera double)
+    int resultadoInt = funcionCompleta(5, 10);  // segundo parámetro debería ser double
+    
+    // Warning: Conversión implícita en return
+    return resultadoInt;  // int a double
 }

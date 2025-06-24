@@ -1,6 +1,7 @@
 com\compilador\MiLenguajeParser$ForInitContext.class
 com\compilador\MiLenguajeParser$IgualExprContext.class
 com\compilador\MiLenguajeParser$FuncionMainContext.class
+com\compilador\App$2.class
 com\compilador\MiLenguajeParser$CharExprContext.class
 com\compilador\MiLenguajeParser$SentenciaInicialContext.class
 com\compilador\MiLenguajeParser$FuncionContext.class
@@ -11,6 +12,7 @@ com\compilador\MiLenguajeParser$ParametrosContext.class
 com\compilador\MiLenguajeParser$ProgramaContext.class
 com\compilador\MiLenguajeParser$AsignacionContext.class
 com\compilador\MiLenguajeParser$ListaDeclaracionContext.class
+com\compilador\TablaSimbolos$EntradaTabla.class
 com\compilador\GeneradorCodigo.class
 com\compilador\MiLenguajeVisitor.class
 com\compilador\MiLenguajeBaseListener.class
@@ -24,6 +26,7 @@ com\compilador\MiLenguajeParser$TipoContext.class
 com\compilador\MiLenguajeParser.class
 com\compilador\MiLenguajeParser$SentenciaContext.class
 com\compilador\App.class
+com\compilador\TablaSimbolos$FuncionInfo.class
 com\compilador\MiErrorListener.class
 com\compilador\MiLenguajeParser$RelacionalContext.class
 com\compilador\MiLenguajeListener.class
@@ -35,6 +38,7 @@ com\compilador\MiLenguajeParser$ExpresionContext.class
 com\compilador\MiLenguajeParser$LlamadaContext.class
 com\compilador\MiLenguajeParser$IfStmtContext.class
 com\compilador\MiLenguajeParser$MasMenosExprContext.class
+com\compilador\Simbolo.class
 com\compilador\AnalizadorSemanticoVisitor.class
 com\compilador\MiLenguajeBaseVisitor.class
 com\compilador\MiLenguajeParser$MulDivExprContext.class

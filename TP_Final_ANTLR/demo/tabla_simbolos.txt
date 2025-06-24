@@ -1,0 +1,84 @@
+=== TABLA DE SIMBOLOS ===
+┌─────────────────────────────┬────────┬───────────┬───────┬─────────┬─────────────────────────────┬───────────────────────────────────────────────────┐
+│ NOMBRE                      │ TIPO   │ CATEGORIA │ LINEA │ COLUMNA │ AMBITO                      │ PARAMETROS                                        │
+├─────────────────────────────┼────────┼───────────┼───────┼─────────┼─────────────────────────────┼───────────────────────────────────────────────────┤
+│ globalNoUsada               │ int    │ Variable  │     7 │       4 │ global                      │ N/A                                               │
+│ piNoUsada                   │ double │ Variable  │     8 │       7 │ global                      │ N/A                                               │
+│ letraNoUsada                │ char   │ Variable  │     9 │       5 │ global                      │ N/A                                               │
+│ globalUsada                 │ int    │ Variable  │    12 │       4 │ global                      │ N/A                                               │
+│ valorGlobal                 │ double │ Variable  │    13 │       7 │ global                      │ N/A                                               │
+│ funcionCompleta             │ int    │ Función   │    18 │       4 │ global                      │ int parametroNoUsado, double otroParametroNoUsado │
+│ parametroNoUsado            │ int    │ Parámetro │    18 │      24 │ funcionCompleta             │ N/A                                               │
+│ otroParametroNoUsado        │ double │ Parámetro │    18 │      49 │ funcionCompleta             │ N/A                                               │
+│ variableNoUsada             │ int    │ Variable  │    20 │       8 │ funcionCompleta             │ N/A                                               │
+│ caracterNoUsado             │ char   │ Variable  │    21 │       9 │ funcionCompleta             │ N/A                                               │
+│ decimalNoUsado              │ double │ Variable  │    22 │      11 │ funcionCompleta             │ N/A                                               │
+│ sinInicializar              │ int    │ Variable  │    25 │       8 │ funcionCompleta             │ N/A                                               │
+│ otroSinInicializar          │ double │ Variable  │    26 │      11 │ funcionCompleta             │ N/A                                               │
+│ numeroDecimal               │ double │ Variable  │    29 │      11 │ funcionCompleta             │ N/A                                               │
+│ numeroDesdeChar             │ int    │ Variable  │    32 │       8 │ funcionCompleta             │ N/A                                               │
+│ decimalDesdeChar            │ double │ Variable  │    35 │      11 │ funcionCompleta             │ N/A                                               │
+│ division                    │ int    │ Variable  │    38 │       8 │ funcionCompleta             │ N/A                                               │
+│ resultado                   │ int    │ Variable  │    41 │       8 │ funcionCompleta             │ N/A                                               │
+│ otroResultado               │ double │ Variable  │    42 │      11 │ funcionCompleta             │ N/A                                               │
+│ dentroIf                    │ int    │ Variable  │    46 │      12 │ funcionCompleta             │ N/A                                               │
+│ localIfNoUsada              │ int    │ Variable  │    48 │      12 │ funcionCompleta             │ N/A                                               │
+│ inalcanzable                │ int    │ Variable  │    54 │       8 │ funcionCompleta             │ N/A                                               │
+│ funcionConReturnImplicito   │ double │ Función   │    58 │       7 │ global                      │ N/A                                               │
+│ entero                      │ int    │ Variable  │    59 │       8 │ funcionConReturnImplicito   │ N/A                                               │
+│ funcionVoidMal              │ void   │ Función   │    65 │       5 │ global                      │ N/A                                               │
+│ valor                       │ int    │ Variable  │    66 │       8 │ funcionVoidMal              │ N/A                                               │
+│ funcionSinReturn            │ int    │ Función   │    72 │       4 │ global                      │ int x                                             │
+│ x                           │ int    │ Parámetro │    72 │      25 │ funcionSinReturn            │ N/A                                               │
+│ y                           │ int    │ Variable  │    73 │       8 │ funcionSinReturn            │ N/A                                               │
+│ funcionParametrosDuplicados │ int    │ Función   │    79 │       4 │ global                      │ int a, int a                                      │
+│ a                           │ int    │ Parámetro │    79 │      36 │ funcionParametrosDuplicados │ N/A                                               │
+│ main                        │ int    │ Función   │    84 │       0 │ global                      │ N/A                                               │
+│ numero1                     │ int    │ Variable  │    86 │       8 │ main                        │ N/A                                               │
+│ numero2                     │ int    │ Variable  │    87 │       8 │ main                        │ N/A                                               │
+│ decimal1                    │ double │ Variable  │    88 │      11 │ main                        │ N/A                                               │
+│ x                           │ int    │ Variable  │    91 │       8 │ main                        │ N/A                                               │
+│ y                           │ int    │ Variable  │    92 │       8 │ main                        │ N/A                                               │
+│ z                           │ int    │ Variable  │    93 │       8 │ main                        │ N/A                                               │
+│ caracterMainNoUsado         │ char   │ Variable  │    96 │       9 │ main                        │ N/A                                               │
+│ decimalMainNoUsado          │ double │ Variable  │    97 │      11 │ main                        │ N/A                                               │
+│ suma                        │ int    │ Variable  │   103 │       8 │ main                        │ N/A                                               │
+│ conversion                  │ double │ Variable  │   106 │      11 │ main                        │ N/A                                               │
+│ conversionPeligrosa         │ int    │ Variable  │   107 │       8 │ main                        │ N/A                                               │
+│ mal                         │ int    │ Variable  │   113 │       8 │ main                        │ N/A                                               │
+│ resultadoFuncion            │ double │ Variable  │   116 │      11 │ main                        │ N/A                                               │
+│ localIfNoUsada              │ int    │ Variable  │   121 │      12 │ main                        │ N/A                                               │
+│ usadaEnIf                   │ int    │ Variable  │   122 │      12 │ main                        │ N/A                                               │
+│ localElseNoUsada            │ char   │ Variable  │   126 │      13 │ main                        │ N/A                                               │
+│ localWhileNoUsada           │ int    │ Variable  │   133 │      12 │ main                        │ N/A                                               │
+│ i                           │ int    │ Variable  │   142 │      13 │ main                        │ N/A                                               │
+│ localForNoUsada             │ int    │ Variable  │   144 │      12 │ main                        │ N/A                                               │
+│ otraLocalFor                │ char   │ Variable  │   145 │      13 │ main                        │ N/A                                               │
+│ j                           │ int    │ Variable  │   155 │      13 │ main                        │ N/A                                               │
+│ x                           │ int    │ Variable  │   157 │      12 │ main                        │ N/A                                               │
+│ temporalFor                 │ int    │ Variable  │   160 │      12 │ main                        │ N/A                                               │
+│ divisionMain                │ int    │ Variable  │   165 │       8 │ main                        │ N/A                                               │
+│ resultadoMixto              │ double │ Variable  │   168 │      11 │ main                        │ N/A                                               │
+│ temporal1                   │ int    │ Variable  │   171 │       8 │ main                        │ N/A                                               │
+│ temporal2                   │ char   │ Variable  │   172 │       9 │ main                        │ N/A                                               │
+│ temporal3                   │ double │ Variable  │   173 │      11 │ main                        │ N/A                                               │
+│ calculo                     │ int    │ Variable  │   176 │       8 │ main                        │ N/A                                               │
+│ finalCalculo                │ int    │ Variable  │   179 │       8 │ main                        │ N/A                                               │
+│ codigoMuerto                │ int    │ Variable  │   185 │       8 │ main                        │ N/A                                               │
+│ masCodigoMuerto             │ char   │ Variable  │   186 │       9 │ main                        │ N/A                                               │
+│ funcionConMasWarnings       │ void   │ Función   │   190 │       5 │ global                      │ int param1, double param2, char param3            │
+│ param1                      │ int    │ Parámetro │   190 │      31 │ funcionConMasWarnings       │ N/A                                               │
+│ param2                      │ double │ Parámetro │   190 │      46 │ funcionConMasWarnings       │ N/A                                               │
+│ param3                      │ char   │ Parámetro │   190 │      59 │ funcionConMasWarnings       │ N/A                                               │
+│ local1                      │ int    │ Variable  │   194 │       8 │ funcionConMasWarnings       │ N/A                                               │
+│ local2                      │ double │ Variable  │   195 │      11 │ funcionConMasWarnings       │ N/A                                               │
+│ local3                      │ char   │ Variable  │   196 │       9 │ funcionConMasWarnings       │ N/A                                               │
+│ noInit                      │ int    │ Variable  │   199 │       8 │ funcionConMasWarnings       │ N/A                                               │
+│ div                         │ int    │ Variable  │   202 │       8 │ funcionConMasWarnings       │ N/A                                               │
+│ resultado                   │ int    │ Variable  │   205 │       8 │ funcionConMasWarnings       │ N/A                                               │
+│ dentroIf                    │ int    │ Variable  │   210 │      12 │ funcionConMasWarnings       │ N/A                                               │
+│ inalcanzable                │ int    │ Variable  │   216 │       8 │ funcionConMasWarnings       │ N/A                                               │
+│ funcionLlamadora            │ double │ Función   │   220 │       7 │ global                      │ N/A                                               │
+│ resultadoInt                │ int    │ Variable  │   222 │       8 │ funcionLlamadora            │ N/A                                               │
+└─────────────────────────────┴────────┴───────────┴───────┴─────────┴─────────────────────────────┴───────────────────────────────────────────────────┘
+Total de símbolos: 78

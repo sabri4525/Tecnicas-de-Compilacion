@@ -1,93 +1,147 @@
 package com.compilador;
 
-import java.util.*;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GeneradorCodigo {
-    private List<String> instrucciones = new ArrayList<>();
-    private int tempCount = 0;
-    private int labelCount = 0;
-    private Stack<String> pilaBreak = new Stack<>();
-    private Stack<String> pilaContinue = new Stack<>();
+    private final List<String> instrucciones = new ArrayList<>();
+    private int contadorTemporal = 1;
+    private int contadorEtiqueta = 1;
+    private String ultimoTemporal = "";
 
+    /**
+     * Genera un nuevo temporal único
+     */
     public String nuevoTemporal() {
-        return "t" + (tempCount++);
+        ultimoTemporal = "t" + contadorTemporal++;
+        return ultimoTemporal;
     }
 
+    /**
+     * Obtiene el último temporal generado
+     */
+    public String getUltimoTemporal() {
+        return ultimoTemporal;
+    }
+
+    /**
+     * Genera una nueva etiqueta única
+     */
     public String nuevaEtiqueta() {
-        return "L" + (labelCount++);
+        return "L" + contadorEtiqueta++;
     }
 
-    public void agregar(String instruccion) {
-        instrucciones.add(instruccion);
+    /**
+     * Genera código de asignación
+     */
+    public void generarAsignacion(String destino, String origen) {
+        instrucciones.add(destino + " = " + origen);
     }
 
-    public void agregarEtiqueta(String etiqueta) {
-        String etiquetaFormateada = "    " + etiqueta + ":";
-        // No agregar si la última instrucción ya es esa etiqueta
-        if (!instrucciones.isEmpty() && instrucciones.get(instrucciones.size() - 1).trim().equals(etiqueta + ":")) {
-            return;
+    /**
+     * Genera código de declaración
+     */
+    public void generarDeclaracion(String variable, String tipo) {
+        instrucciones.add("DECLARE " + tipo + " " + variable);
+    }
+
+    /**
+     * Genera código de operación aritmética o lógica
+     */
+    public void generarOperacion(String resultado, String operando1, String operador, String operando2) {
+        instrucciones.add(resultado + " = " + operando1 + " " + operador + " " + operando2);
+    }
+
+    /**
+     * Genera código de salto incondicional
+     */
+    public void generarSalto(String etiqueta) {
+        instrucciones.add("GOTO " + etiqueta);
+    }
+
+    /**
+     * Genera código de salto condicional
+     */
+    public void generarSaltoCondicional(String condicion, String operando, String etiqueta) {
+        if (condicion.equals("ifFalse")) {
+            instrucciones.add("IF_FALSE " + operando + " GOTO " + etiqueta);
+        } else {
+            instrucciones.add("IF_TRUE " + operando + " GOTO " + etiqueta);
         }
-        // No agregar si la última instrucción también es una etiqueta (evita etiquetas
-        // seguidas)
-        if (!instrucciones.isEmpty() && instrucciones.get(instrucciones.size() - 1).trim().endsWith(":")) {
-            return;
+    }
+
+    /**
+     * Genera una etiqueta
+     */
+    public void generarEtiqueta(String etiqueta) {
+        instrucciones.add(etiqueta + ":");
+    }
+
+    /**
+     * Genera código de return
+     */
+    public void generarReturn(String valor) {
+        if (valor != null) {
+            instrucciones.add("RETURN " + valor);
+        } else {
+            instrucciones.add("RETURN");
         }
-        instrucciones.add(etiquetaFormateada);
     }
 
-    public void pushBreak(String etiqueta) {
-        pilaBreak.push(etiqueta);
+    /**
+     * Genera código para pasar parámetros
+     */
+    public void generarParametro(String valor) {
+        instrucciones.add("PARAM " + valor);
     }
 
-    public void popBreak() {
-        pilaBreak.pop();
+    /**
+     * Genera código de llamada a función
+     */
+    public void generarLlamada(String resultado, String nombreFuncion) {
+        instrucciones.add(resultado + " = CALL " + nombreFuncion);
     }
 
-    public String topBreak() {
-        return pilaBreak.peek();
-    }
-
-    public void pushContinue(String etiqueta) {
-        pilaContinue.push(etiqueta);
-    }
-
-    public void popContinue() {
-        pilaContinue.pop();
-    }
-
-    public String topContinue() {
-        return pilaContinue.peek();
-    }
-
-    public void limpiarTemporales() {
-        tempCount = 0;
-    }
-
+    /**
+     * Imprime todo el código generado por consola
+     */
     public void imprimirCodigo() {
-        for (int i = 0; i < instrucciones.size(); i++) {
-            String instr = instrucciones.get(i);
-            if (!instr.trim().endsWith(":")) {
-                System.out.printf("%3d: %s\n", i, instr);
-            } else {
-                System.out.println(instr);
+        System.out.println("\n=== CODIGO INTERMEDIO GENERADO ===");
+        for (String instruccion : instrucciones) {
+            System.out.println(instruccion);
+        }
+        System.out.println("=== FIN CODIGO INTERMEDIO ===\n");
+    }
+
+    /**
+     * Guarda el código generado en un archivo
+     */
+    public void guardarArchivo(String nombreArchivo) throws IOException {
+        try (PrintWriter out = new PrintWriter(nombreArchivo)) {
+            out.println("=== CODIGO INTERMEDIO GENERADO ===");
+            for (String instruccion : instrucciones) {
+                out.println(instruccion);
             }
+            out.println("=== FIN CODIGO INTERMEDIO ===");
         }
     }
 
-    public void guardarArchivo(String nombreArchivo) throws java.io.IOException {
-        try (java.io.PrintWriter out = new java.io.PrintWriter(nombreArchivo)) {
-            for (int i = 0; i < instrucciones.size(); i++) {
-                String instr = instrucciones.get(i);
-                if (!instr.trim().endsWith(":")) {
-                    out.printf("%3d: %s\n", i, instr);
-                } else {
-                    out.println(instr);
-                }
-            }
-        }
-    }
-
+    /**
+     * Obtiene todas las instrucciones generadas
+     */
     public List<String> getInstrucciones() {
-        return instrucciones;
+        return new ArrayList<>(instrucciones);
+    }
+
+    /**
+     * Limpia todas las instrucciones generadas
+     */
+    public void limpiar() {
+        instrucciones.clear();
+        contadorTemporal = 1;
+        contadorEtiqueta = 1;
+        ultimoTemporal = "";
     }
 }

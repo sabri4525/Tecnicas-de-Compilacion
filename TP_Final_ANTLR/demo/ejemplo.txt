@@ -1,46 +1,93 @@
-// Declaración de función con parámetros y retorno
-int suma(int a, int b) {
-    int resultado = a + b;
+// =============================
+// EJEMPLO COMPLETO SIN WARNINGS
+// =============================
+
+// ===== ÁMBITO GLOBAL =====
+
+// Variables globales
+int globalUsada = 100;
+
+int funcionCompleta(int parametroUsado, double otroParametroUsado) {
+    parametroUsado++;
+    otroParametroUsado++;
+
+    int resultado = 5;
+    
+    if (resultado != 200) {
+        int dentroIf = 1;
+        dentroIf++;
+    }
+    
     return resultado;
 }
 
-// Declaración de función sin retorno
-void imprimirSuma(int x, int y) {
-    int s = suma(x, y);
+double funcionConReturnImplicito() {
+    double entero = 42.0;
+    return entero;
 }
 
-// Declaración de variables globales
-int global = 10;
-double pi = 3.14;
-char letra = 'A';
+int funcionSinReturn(int x) {
+    int y = x + 1;
+    return y;
+}
 
-// Función principal
+int funcion1(int a) {
+    return a + 1;
+}
+
+// ===== FUNCIÓN MAIN =====
 int main() {
-    int x = 5, y = 7, z;
-    //double d = 2.5;
-    //char c = 'b';
+    int numero1 = 0;
+    int numero2 = 0;
+    
+    // Variables que SÍ se usan
+    int x = 5;
+    int y = 7;
+    int z;
+    
+    x = globalUsada + 1;
+    
+    int suma = numero1 + 5;
 
-    z = suma(x, y);
-
+    suma++;
+    
+    z = funcionCompleta(x, 2.5);
+    
     if (z > 10) {
-        z = z - 1;
+        int usadaEnIf = 200;
+        z = usadaEnIf - 1;
     } else {
         z = z + 1;
     }
-
-    while (x < 10) {
+    
+    while (x < 15) {        
         x = x + 1;
-        if (x == 8) {
+        if (x == 12) {
             break;
         }
     }
-
+    
     for (int i = 0; i < 5; i = i + 1) {
-        y = y + i;
-        if (y > 20) {
+        //y = y + i;
+        
+        if (y > 25) {
             continue;
         }
     }
+    
+    for (int j = 0; j < 3; j = j + 1) {
+        int x = 999;  // x ya existe. En C++, esto es técnicamente legal (se llama "shadowing" o "sombreado")
+    }
+    
+    double resultadoMixto = 1.15 + 3.14;
+    
+    resultadoMixto++;
 
-    return 0;
+    int temporal1 = 100;
+    
+    int calculo = temporal1 * 2;
+    
+    int finalCalculo = numero2 + calculo;
+    
+    return finalCalculo;
 }

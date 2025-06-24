@@ -42,7 +42,7 @@ listaDeclaracion: declarador (COMA declarador)*;
 declarador: ID (IGUAL expresion)?;
 
 // Asignación
-asignacion: ID IGUAL expresion;
+asignacion: ID IGUAL expresion | ID INCR | INCR ID;
 
 // If-Else
 ifStmt: IF PIZQ expresion PDER sentencia (ELSE sentencia)?;
@@ -103,6 +103,7 @@ IGUAL_IGUAL: '==';
 DISTINTO: '!=';
 AND: '&&';
 OR: '||';
+INCR: '++';
 
 // Palabras reservadas
 MAIN: 'main';
